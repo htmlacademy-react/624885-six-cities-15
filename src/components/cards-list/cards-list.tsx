@@ -1,9 +1,10 @@
+import { Pages } from '../../const';
 import { OfferType } from '../../types/offers';
 import Card from '../card/card';
 
 type CardsListProps = {
   offers: OfferType[];
-  page: string;
+  page: Pages;
   onCardHover?: (offer: OfferType | null) => void;
 }
 
