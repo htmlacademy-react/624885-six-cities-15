@@ -1,18 +1,25 @@
 import { generatePath, Link } from 'react-router-dom';
 
-import { AppRoute } from '../../const';
+import { AppRoute, Pages } from '../../const';
 import { OfferType } from '../../types/offers';
 import FavoriteButton from '../favorite-button/favorite-button';
 import Stars from '../stars/stars';
 
 type CardProps = {
   offer: OfferType;
-  page: string;
+  page: Pages;
   onCardHover?: (offer: OfferType | null) => void;
 }
 
 export default function Card({ offer, page, onCardHover }: CardProps): JSX.Element {
   const { id, title, type, price, isFavorite, isPremium, previewImage, rating } = offer;
+
+  const imageDimensions = {
+    [Pages.Main]: {width: '260', height: '200'},
+    [Pages.Favorites]:  {width: '150', height: '100'},
+    [Pages.Offer]: {width: '260', height: '200'}
+  };
+
   const handleMouseEnter = () => {
     if (onCardHover) {
       return onCardHover(offer);
@@ -36,7 +43,13 @@ export default function Card({ offer, page, onCardHover }: CardProps): JSX.Eleme
         </div>}
       <div className={`${page}__image-wrapper place-card__image-wrapper`}>
         <a href="#">
-          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
+          <img
+            className="place-card__image"
+            src={previewImage}
+            width={imageDimensions[page].width}
+            height={imageDimensions[page].height}
+            alt="Place image"
+          />
         </a>
       </div>
       <div className="place-card__info">

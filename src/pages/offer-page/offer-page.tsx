@@ -20,6 +20,7 @@ import { getReviews } from '../../store/reviews/reviews-selectors';
 import { getAuthorizationStatus } from '../../store/user/user-selectors';
 import LoadingPage from '../loading-page/loading-page';
 import NotFoundPage from '../not-found-page/not-found-page';
+import { formatBedroomsString, formatMaxAdultsString } from './utils';
 
 export default function OfferPage(): JSX.Element {
   const isAuthorized = useAppSelector(getAuthorizationStatus) === AuthorizationStatus.Auth;
@@ -104,10 +105,10 @@ export default function OfferPage(): JSX.Element {
                   {type}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  {bedrooms} Bedrooms
+                  {formatBedroomsString(bedrooms)}
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                  Max {maxAdults} adults
+                  {formatMaxAdultsString(maxAdults)}
                 </li>
               </ul>
               <div className="offer__price">
